@@ -41,6 +41,16 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_adc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_adc_ex.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/STM32H7xx_HAL_Driver/stm32h7xx_hal_cortex.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c</locationURI>
@@ -136,6 +146,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c</locationURI>
 		</link>
 		<link>
+			<name>Application/User/Core/adc.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/CM7/Core/Src/adc.c</locationURI>
+		</link>
+		<link>
 			<name>Application/User/Core/gpio.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/CM7/Core/Src/gpio.c</locationURI>
@@ -154,6 +169,11 @@
 			<name>Application/User/Core/stm32h7xx_it.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/CM7/Core/Src/stm32h7xx_it.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Core/tim.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/CM7/Core/Src/tim.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/Core/usart.c</name>
