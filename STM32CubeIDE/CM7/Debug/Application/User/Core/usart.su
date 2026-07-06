@@ -1,3 +1,0 @@
-C:/workspace/tenic/tenic_motorcontrol_FOC_20260701/stm32h755_foc_algorithm/CM7/Core/Src/usart.c:31:6:MX_USART3_UART_Init	8	static
-C:/workspace/tenic/tenic_motorcontrol_FOC_20260701/stm32h755_foc_algorithm/CM7/Core/Src/usart.c:74:6:HAL_UART_MspInit	240	static
-C:/workspace/tenic/tenic_motorcontrol_FOC_20260701/stm32h755_foc_algorithm/CM7/Core/Src/usart.c:118:6:HAL_UART_MspDeInit	16	static
