@@ -1,0 +1,10 @@
+# STM32CubeIDE build outputs
+Debug/
+Release/
+*.o
+*.su
+*.d
+
+# OS generated files
+.DS_Store
+Thumbs.db
