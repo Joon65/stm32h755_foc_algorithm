@@ -46,6 +46,8 @@ extern volatile int16_t		PhaseA_current;
 extern volatile int16_t		PhaseB_current;
 extern volatile int16_t		phaseC_current;
 
+extern volatile uint16_t	timer6_flag;
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -66,6 +68,30 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define M1_CURR_AMPL_W_Pin GPIO_PIN_0
+#define M1_CURR_AMPL_W_GPIO_Port GPIOC
+#define M1_CURR_AMPL_V_Pin GPIO_PIN_1
+#define M1_CURR_AMPL_V_GPIO_Port GPIOC
+#define M1_CURR_AMPL_U_Pin GPIO_PIN_0
+#define M1_CURR_AMPL_U_GPIO_Port GPIOA
+#define M1_BUS_VOLTAGE_Pin GPIO_PIN_1
+#define M1_BUS_VOLTAGE_GPIO_Port GPIOA
+#define M1_OCP_Pin GPIO_PIN_6
+#define M1_OCP_GPIO_Port GPIOA
+#define M1_PWM_UL_Pin GPIO_PIN_7
+#define M1_PWM_UL_GPIO_Port GPIOA
+#define M1_PWM_VL_Pin GPIO_PIN_0
+#define M1_PWM_VL_GPIO_Port GPIOB
+#define M1_PWM_WL_Pin GPIO_PIN_1
+#define M1_PWM_WL_GPIO_Port GPIOB
+#define M1_PWM_UH_Pin GPIO_PIN_8
+#define M1_PWM_UH_GPIO_Port GPIOA
+#define M1_PWM_VH_Pin GPIO_PIN_9
+#define M1_PWM_VH_GPIO_Port GPIOA
+#define M1_PWM_WH_Pin GPIO_PIN_10
+#define M1_PWM_WH_GPIO_Port GPIOA
+#define LED_YELLOW_Pin GPIO_PIN_1
+#define LED_YELLOW_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 

@@ -65,4 +65,10 @@ void Set_Inverter_Voltage(float v_alpha, float v_beta, float v_dc)
 	TIM1->CCR1 = (uint32_t)(duty_a * current_arr);
 	TIM1->CCR2 = (uint32_t)(duty_b * current_arr);
 	TIM1->CCR3 = (uint32_t)(duty_c * current_arr);
+
+	__DSB();
+
+	volatile uint32_t register_flush = TIM1->CCR1;
+	(void)register_flush;
+
 }

@@ -4,8 +4,12 @@
 #include <stdint.h>
 
 // For 24V motor
-#define		TARGET_MAX_MAGNITUDE		15.0f
-#define		RATED_MAGNITUDE				24.0f
+//#define		TARGET_MAX_MAGNITUDE		15.0f
+//#define		RATED_MAGNITUDE				24.0f
+
+// For 48V motor
+#define		TARGET_MAX_MAGNITUDE		25.0f	// 30.0f, PWM Duty becomes 0
+#define		RATED_MAGNITUDE				48.0f
 
 // Structural representation of stationary 2-axis currents
 typedef struct

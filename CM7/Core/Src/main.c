@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -67,6 +68,8 @@ volatile uint16_t	raw_PhaseC_current[1] = {0};
 volatile int16_t		PhaseA_current = 0;
 volatile int16_t		PhaseB_current = 0;
 volatile int16_t		phaseC_current = 0;
+
+volatile uint16_t		timer6_flag= 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -155,10 +158,39 @@ Error_Handler();
   MX_USART3_UART_Init();
   MX_TIM1_Init();
   MX_ADC1_Init();
-  MX_ADC2_Init();
   MX_ADC3_Init();
   MX_TIM2_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
+
+  printf("--- Starting Minimal 3-Channel Hardware Test ---\r\n");
+
+  // 1. Set explicit, distinct static duty cycles for each phase
+  // Assuming your ARR (Period) is set to something like 2000 or 4000:
+  uint32_t period = __HAL_TIM_GET_AUTORELOAD(&htim1);
+
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, (period * 25) / 100);  // 25% Duty Cycle
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, (period * 50) / 100);  // 50% Duty Cycle
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_3, (period * 75) / 100);  // 75% Duty Cycle
+
+  // 2. Start all 3 High-Side and Low-Side Complementary PWM outputs
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
+
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
+
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_3);
+
+  // 3. Clear any transient power-on Break Fault states
+  __HAL_TIM_CLEAR_FLAG(&htim1, TIM_FLAG_BREAK);
+
+  // 4. Force fully arm the Master Output Enable (MOE) bit
+  __HAL_TIM_MOE_ENABLE(&htim1);
+
+  printf("Static PWM signals are now active. Check UVW terminals.\r\n");
+
 
   /* USER CODE END 2 */
 
@@ -169,8 +201,26 @@ Error_Handler();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	printf("Hellow World\r\n");
-	HAL_Delay(1000);
+	  if (timer6_flag == 1)
+	  {
+		  timer6_flag = 0;
+		  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
+
+		  uint32_t cr1  = TIM1->CR1;
+		  uint32_t bdtr = TIM1->BDTR;
+		  uint32_t ccer = TIM1->CCER;
+
+		  printf("--- TIM1 PWM Audit ---\r\n");
+		  printf("Timer Enabled (CEN): %s\r\n",  (cr1 & (1 << 0)) ? "YES" : "NO");
+		  printf("Counter Moving (CNT): %lu\r\n", TIM1->CNT);
+		  printf("Target Period (ARR):  %lu\r\n", TIM1->ARR);
+		  printf("Duty Cycle (CCR1):    %lu\r\n", TIM1->CCR1);
+
+		  // Advanced Timer specific checks
+		  printf("Outputs Master Enable (MOE): %s\r\n", (bdtr & (1 << 15)) ? "ON" : "OFF (Pins Dead!)");
+		  printf("Channel 1 Output Enable (CC1E): %s\r\n", (ccer & (1 << 0)) ? "ON" : "OFF");
+		  printf("----------------------\r\n");
+	  }
 
   }
   /* USER CODE END 3 */
